@@ -1,14 +1,25 @@
 package com.tokopedia.core
 
+import android.R
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Paint
 import android.os.Build
 import android.text.Html
 import android.text.Spanned
 import android.util.DisplayMetrics
 import android.webkit.WebView
+import android.widget.ImageView
+import android.widget.TextView
+import org.json.JSONObject
+import java.io.ByteArrayOutputStream
+import java.io.IOException
+import java.io.InputStream
+import java.text.NumberFormat
+import java.util.*
 
+fun emptyString() = ""
 
 @Suppress("DEPRECATION")
 fun String.fromHtml(): Spanned {
@@ -34,4 +45,35 @@ fun pxToDp(px: Float, context: Context): Float {
 
 fun WebView.loadFile(filePath: String) {
     loadUrl("file:///android_asset/$filePath");
+}
+
+fun Context.jsonToString(rawId:Int):String{
+    val inputStream: InputStream = resources.openRawResource(rawId)
+    val byteArrayOutputStream = ByteArrayOutputStream()
+
+    var ctr: Int
+    try {
+        ctr = inputStream.read()
+        while (ctr != -1) {
+            byteArrayOutputStream.write(ctr)
+            ctr = inputStream.read()
+        }
+        inputStream.close()
+    } catch (e: IOException) {
+        e.printStackTrace()
+    }
+
+    return byteArrayOutputStream.toString()
+}
+
+fun TextView.makeStrikeThrough(){
+    paintFlags  = Paint.STRIKE_THRU_TEXT_FLAG
+}
+
+fun toRupiahCurrency(value: Int): String {
+    return "Rp " + NumberFormat.getNumberInstance(Locale("in")).format(value.toDouble())
+}
+
+fun toPercentageFormat(value: Int): String {
+    return "$value %"
 }

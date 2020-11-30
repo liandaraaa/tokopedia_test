@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="filter">Filter</string>
+    <string name="sample_discount">10%</string>
+    <string name="sample_price">Rp9.150</string>
+    <string name="sample_seller_name">Seller Store</string>
+    <string name="sample_product_name">Macbook Pro</string>
+    <string name="sample_city">Jakarta</string>
 </resources>
