@@ -1,25 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/product_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/fabFilter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_filter_list_black_24dp"
-        android:tint="@android:color/white"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
         android:layout_margin="16dp"
         android:clickable="true"
         android:focusable="true"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        app:fabSize="normal"
-        app:rippleColor="@android:color/holo_green_dark"/>
+        android:text="@string/filter"
+        android:textSize="@dimen/text_size_12sp"
+        app:icon="@drawable/ic_filter_list_white_24dp"
+        android:textColor="@color/colorWhite"
+        android:background="@drawable/bg_primary_rectangle_radius_24"/>
+
 </RelativeLayout>

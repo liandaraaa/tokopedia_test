@@ -9,9 +9,11 @@ import android.os.Build
 import android.text.Html
 import android.text.Spanned
 import android.util.DisplayMetrics
+import android.view.View
 import android.webkit.WebView
 import android.widget.ImageView
 import android.widget.TextView
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import org.json.JSONObject
 import java.io.ByteArrayOutputStream
 import java.io.IOException
@@ -66,8 +68,26 @@ fun Context.jsonToString(rawId:Int):String{
     return byteArrayOutputStream.toString()
 }
 
+fun Context.generateBottomSheetDialog(
+        layoutId: Int,
+        cancelable: Boolean = false,
+        style:Int
+): BottomSheetDialog {
+    return BottomSheetDialog(this, style).apply {
+        val view = View.inflate(context, layoutId, null)
+        setContentView(view)
+        setCancelable(cancelable)
+        setCanceledOnTouchOutside(cancelable)
+        show()
+    }
+}
+
 fun TextView.makeStrikeThrough(){
     paintFlags  = Paint.STRIKE_THRU_TEXT_FLAG
+}
+
+fun <T>Collection<T>.getMostCommonInList(count:Int):Map<T,Int>{
+    return groupBy { it }.mapValues { it.value.size }.toList().sortedByDescending { it.second }.take(count).toMap()
 }
 
 fun toRupiahCurrency(value: Int): String {

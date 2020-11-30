@@ -6,4 +6,9 @@
     <string name="sample_seller_name">Seller Store</string>
     <string name="sample_product_name">Macbook Pro</string>
     <string name="sample_city">Jakarta</string>
+    <string name="label_select_location">Pilih Lokasi</string>
+    <string name="sample_location">Jakarta</string>
+    <string name="action_apply">Terapkan</string>
+    <string name="label_set_price">Atur Harga</string>
+    <string name="label_other">Other</string>
 </resources>

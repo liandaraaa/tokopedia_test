@@ -13,11 +13,11 @@ import com.tokopedia.filter.R
 import com.tokopedia.filter.model.Product
 import kotlinx.android.synthetic.main.product_item.view.*
 
-class ProductAdapter(val context:Context, val data:List<Product>) :RecyclerView.Adapter<ProductAdapter.ProductViewHolder>(){
+class ProductAdapter(private val context: Context, private var data: List<Product>) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
 
-    inner class ProductViewHolder(view:View):RecyclerView.ViewHolder(view){
-        fun bind(product:Product){
-            with(itemView){
+    inner class ProductViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        fun bind(product: Product) {
+            with(itemView) {
 
                 tvSecondPriceProduct.visibility = if (product.discountPercentage == 0) View.GONE else View.VISIBLE
                 tvDiscount.visibility = if (product.discountPercentage == 0) View.GONE else View.VISIBLE
@@ -44,4 +44,21 @@ class ProductAdapter(val context:Context, val data:List<Product>) :RecyclerView.
     }
 
     override fun getItemCount(): Int = data.size
+
+    fun notifyDataAddOrUpdate(newData: List<Product>) {
+        data = newData
+        notifyDataSetChanged()
+    }
+
+    fun filterProduct(newData: List<Product>, location: String, minPrice: Float, maxPrice: Float) {
+        var dataFiltered = newData
+        if (location.isNotEmpty()) {
+            dataFiltered = newData.filter { it.shop.city == location }
+        }
+        val filter = dataFiltered.filter {
+            it.priceInt >= minPrice && it.priceInt <= maxPrice
+        }
+        data = filter
+        notifyDataSetChanged()
+    }
 }
