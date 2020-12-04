@@ -1,4 +1,4 @@
-package com.tokopedia.testproject
+package com.tokopedia.testproject.presentation.main
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,6 +10,8 @@ import com.tokopedia.filter.view.FilterCaseActivity
 import com.tokopedia.maps.MapsCaseActivity
 import com.tokopedia.minimumpathsum.MinimumPathSumActivity
 import com.tokopedia.oilreservoir.OilReservoirActivity
+import com.tokopedia.testproject.BuildConfig
+import com.tokopedia.testproject.R
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {

@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="maps">Maps</string>
+    <string name="format_country_name">Nama negara: %s</string>
+    <string name="format_country_capital">Ibukota: %s</string>
+    <string name="format_country_population">Jumlah penduduk: %d</string>
+    <string name="format_country_call_code">Kode telepon: %s</string>
+    <string name="action_search">Cari</string>
+    <string name="hint_input_country_name">Masukkan nama negara</string>
+    <string name="label_country_name">Nama negara:</string>
+    <string name="label_country_capital">Ibukota:</string>
+    <string name="label_country_population">Jumlah penduduk:</string>
+    <string name="label_country_call_code">Kode telepon:</string>
 </resources>

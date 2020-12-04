@@ -1,5 +1,6 @@
 package com.tokopedia.testproject
 
+import com.tokopedia.testproject.presentation.main.MainActivity
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
