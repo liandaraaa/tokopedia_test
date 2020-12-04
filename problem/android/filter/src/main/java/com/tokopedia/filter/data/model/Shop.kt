@@ -1,4 +1,4 @@
-package com.tokopedia.filter.model
+package com.tokopedia.filter.data.model
 
 import com.tokopedia.core.emptyString
 

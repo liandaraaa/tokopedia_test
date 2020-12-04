@@ -49,8 +49,8 @@ fun WebView.loadFile(filePath: String) {
     loadUrl("file:///android_asset/$filePath");
 }
 
-fun Context.jsonToString(rawId:Int):String{
-    val inputStream: InputStream = resources.openRawResource(rawId)
+fun jsonToString(context: Context, rawId:Int):String{
+    val inputStream: InputStream =context.resources.openRawResource(rawId)
     val byteArrayOutputStream = ByteArrayOutputStream()
 
     var ctr: Int

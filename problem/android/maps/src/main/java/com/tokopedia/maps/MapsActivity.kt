@@ -58,7 +58,7 @@ open class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     }
                     is Result.Success -> {
                         pbCountry.gone()
-                        googleMap?.clear()
+                        reset()
                         countries = it.data
                         showCountry()
                     }
@@ -69,8 +69,14 @@ open class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 }
             })
         }
+    }
 
-
+    private fun reset(){
+        googleMap?.clear()
+        txtCountryName.text = getString(R.string.label_country_name)
+        txtCountryCapital.text =  getString(R.string.label_country_capital)
+        txtCountryPopulation.text =  getString(R.string.label_country_population)
+        txtCountryCallCode.text =  getString(R.string.label_country_call_code)
     }
 
     private fun loadMap() {

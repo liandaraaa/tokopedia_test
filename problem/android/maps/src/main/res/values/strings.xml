@@ -11,4 +11,5 @@
     <string name="label_country_capital">Ibukota:</string>
     <string name="label_country_population">Jumlah penduduk:</string>
     <string name="label_country_call_code">Kode telepon:</string>
+    <string name="label_show_country_information">Klik pada penanda lokasi untuk melihat informasi negara !</string>
 </resources>

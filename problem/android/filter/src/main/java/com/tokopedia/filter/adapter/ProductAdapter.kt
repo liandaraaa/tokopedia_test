@@ -10,7 +10,7 @@ import com.tokopedia.core.makeStrikeThrough
 import com.tokopedia.core.toPercentageFormat
 import com.tokopedia.core.toRupiahCurrency
 import com.tokopedia.filter.R
-import com.tokopedia.filter.model.Product
+import com.tokopedia.filter.data.model.Product
 import kotlinx.android.synthetic.main.product_item.view.*
 
 class ProductAdapter(private val context: Context, private var data: List<Product>) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {

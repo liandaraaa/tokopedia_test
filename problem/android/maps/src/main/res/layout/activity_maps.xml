@@ -30,45 +30,54 @@
 
     <fragment
         android:id="@+id/map"
-        android:layout_below="@id/serachContainer"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="300dp"
+        android:layout_below="@id/serachContainer"
         tools:context="com.example.mapwithmarker.view.MapsMarkerActivity" />
 
     <TextView
-        android:id="@+id/txtCountryName"
-        android:layout_below="@id/map"
+        android:id="@+id/tvLabelShowCountryInformation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/map"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/label_show_country_information" />
+
+    <TextView
+        android:id="@+id/txtCountryName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvLabelShowCountryInformation"
         android:text="@string/label_country_name" />
 
     <TextView
         android:id="@+id/txtCountryCapital"
-        android:layout_below="@id/txtCountryName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/txtCountryName"
         android:text="@string/label_country_capital" />
 
     <TextView
         android:id="@+id/txtCountryPopulation"
-        android:layout_below="@id/txtCountryCapital"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/txtCountryCapital"
         android:text="@string/label_country_population" />
 
     <TextView
         android:id="@+id/txtCountryCallCode"
-        android:layout_below="@id/txtCountryPopulation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/txtCountryPopulation"
         android:text="@string/label_country_call_code" />
 
     <ProgressBar
+        android:id="@+id/pbCountry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/pbCountry"
         android:layout_centerInParent="true"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
 </RelativeLayout>

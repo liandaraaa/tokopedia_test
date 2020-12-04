@@ -3,22 +3,22 @@ package com.tokopedia.filter.view
 import android.os.Bundle
 import android.view.ContextThemeWrapper
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.chip.Chip
-import com.google.android.material.slider.LabelFormatter
 import com.google.android.material.slider.RangeSlider
 import com.tokopedia.core.*
 import com.tokopedia.filter.R
 import com.tokopedia.filter.adapter.ProductAdapter
-import com.tokopedia.filter.model.Product
-import com.tokopedia.filter.model.jsonToProduct
+import com.tokopedia.filter.data.model.Product
 import kotlinx.android.synthetic.main.activity_product.*
 import kotlinx.android.synthetic.main.layout_filter_bottomsheet_dialog.*
-import kotlin.math.min
 
 class ProductActivity : AppCompatActivity() {
 
     private var products: List<Product> = listOf()
+
+    private lateinit var viewModel: ProductViewModel
 
     private val productAdapter: ProductAdapter by lazy { ProductAdapter(this, products) }
 
@@ -26,15 +26,33 @@ class ProductActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_product)
 
-        showProductList()
+        viewModel = ProductViewModel(this)
+
+        observeProduct()
 
         fabFilter.setOnClickListener { showFilterDialog() }
     }
 
-    private fun showProductList() {
-        val fileContent = jsonToString(R.raw.products)
-        products = jsonToProduct(fileContent)
+    private fun observeProduct() {
+        viewModel.getProducts().observe(this, Observer {
+            when (it) {
+                is Result.Loading -> {
+                    pbProduct.visible()
+                }
+                is Result.Success -> {
+                    pbProduct.gone()
+                    products = it.data
+                    showProductList()
+                }
+                is Result.Error -> {
+                    pbProduct.gone()
+                    showToast(it.throwable.localizedMessage)
+                }
+            }
+        })
+    }
 
+    private fun showProductList() {
         productAdapter.notifyDataAddOrUpdate(products)
         product_list.apply {
             layoutManager = GridLayoutManager(this@ProductActivity, 2)
