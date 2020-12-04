@@ -1,21 +1,19 @@
 package com.tokopedia.maps
 
-import android.app.ProgressDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.tokopedia.core.*
 import com.tokopedia.domain.model.Country
 import kotlinx.android.synthetic.main.activity_maps.*
 
-open class MapsActivity : AppCompatActivity() {
+open class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private var mapFragment: SupportMapFragment? = null
     private var googleMap: GoogleMap? = null
@@ -27,6 +25,8 @@ open class MapsActivity : AppCompatActivity() {
 
     private var editText: EditText? = null
     private var buttonSubmit: View? = null
+
+    private var countries: List<Country> = listOf()
 
     private lateinit var viewModel: MapsViewModel
 
@@ -53,35 +53,59 @@ open class MapsActivity : AppCompatActivity() {
         buttonSubmit!!.setOnClickListener {
             viewModel.getCountry(editText?.text.toString()).observe(this, Observer {
                 when (it) {
-                    is Result.Loading ->{
+                    is Result.Loading -> {
                         pbCountry.visible()
                     }
                     is Result.Success -> {
                         pbCountry.gone()
-                        val country = it.data
-                        showCountryInformation(country.first())
+                        googleMap?.clear()
+                        countries = it.data
+                        showCountry()
                     }
                     is Result.Error -> {
                         pbCountry.gone()
-                        showToast(it.throwable.message)
+                        showToast(it.throwable.localizedMessage)
                     }
                 }
             })
-            // search by the given country name, and
-            // 1. pin point to the map
         }
+
+
     }
 
     private fun loadMap() {
         mapFragment!!.getMapAsync { googleMap -> this@MapsActivity.googleMap = googleMap }
     }
 
-    private fun showCountryInformation(country:Country){
+    private fun showCountry() {
+        countries.forEach { country ->
+            googleMap?.addMarkLocation(
+                    latitude = country.latLng.latitude,
+                    longitude = country.latLng.longitude,
+                    title = country.name
+            )
+
+            googleMap?.showLocation(latitude = country.latLng.latitude,
+                    longitude = country.latLng.longitude)
+
+            googleMap?.setOnMarkerClickListener { marker ->
+                val selectedCountry = countries.find { it.latLng == marker.position }
+                selectedCountry?.let { showCountryInformation(it) }
+                return@setOnMarkerClickListener false
+            }
+        }
+    }
+
+    private fun showCountryInformation(country: Country) {
         country.apply {
             txtCountryName.text = String.format(getString(R.string.format_country_name, name))
             txtCountryCapital.text = String.format(getString(R.string.format_country_capital, capital))
             txtCountryPopulation.text = String.format(getString(R.string.format_country_population, population))
             txtCountryCallCode.text = String.format(getString(R.string.format_country_call_code, callingCode))
         }
+    }
+
+    override fun onMapReady(map: GoogleMap?) {
+
     }
 }
