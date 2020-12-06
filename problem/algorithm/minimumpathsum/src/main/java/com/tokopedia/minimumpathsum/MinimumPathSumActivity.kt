@@ -18,7 +18,7 @@ class MinimumPathSumActivity : AppCompatActivity() {
                 intArrayOf(1, 5, 1, 1),
                 intArrayOf(4, 2, 1, 1)))
 
-        println(number)
+        println("minpath $number")
     }
 
 }

@@ -15,6 +15,6 @@ class ClimbingStairsActivity: AppCompatActivity() {
 
         // example of how to call the function
        val step =  Solution.climbStairs(2)
-        Log.d("Claimstar", "$step")
+        println("Claimstar $step")
     }
 }
